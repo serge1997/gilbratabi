@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UsuarioController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,9 +14,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+Route::get('/', [UsuarioController::class, 'index'])
+    ->name('inicio');
 
-    return view('inicio',[
-        'nome'=> "Serge Gogo",
-    ]);
-});
+Route::get('/cadastra', [UsuarioController::class, 'cadastra'])
+    ->name('cadastra');
+
+
+Route::get('/logar', [UsuarioController::class, 'logar'])
+    ->name('logar');
