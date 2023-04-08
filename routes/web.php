@@ -23,3 +23,6 @@ Route::get('/cadastra', [UsuarioController::class, 'cadastra'])
 
 Route::get('/logar', [UsuarioController::class, 'logar'])
     ->name('logar');
+
+Route::post('/cadastra/usuario', [UsuarioController::class, 'store'])
+    ->name('store.user');

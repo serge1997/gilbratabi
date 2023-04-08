@@ -11,7 +11,7 @@
             @if (session('success'))
                 <p class="p-2 text-green-600 ">{{ session('success') }}</p>
             @endif
-            <form action="" method="post">
+            <form action="{{ route('store.user') }}" method="post">
                 @csrf
               <div class="input flex flex-col p-2">
                 <label class="text-gray-700 uppercase">nome:</label>
