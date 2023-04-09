@@ -62,7 +62,7 @@
                             @if (Auth::user())
                                 <h3 class="font-medium uppercase">{{ Auth::user()->name }}</h3>    
                             @endif
-                            <a href="" class="py-2 px-4 font-medium text-white bg-sky-500 hover:bg-sky-400 transition duration-300">Sair</a>
+                            <a href="{{ route('sair') }}" class="py-2 px-4 font-medium text-white bg-sky-500 hover:bg-sky-400 transition duration-300">Sair</a>
                         @endauth
 
 					</div>

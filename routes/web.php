@@ -14,15 +14,60 @@ use App\Http\Controllers\UsuarioController;
 |
 */
 
-Route::get('/', [UsuarioController::class, 'index'])
-    ->name('inicio');
+Route::get('/', [UsuarioController::class, 'logar'])
+    ->name('logar');
 
 Route::get('/cadastra', [UsuarioController::class, 'cadastra'])
     ->name('cadastra');
 
 
-Route::get('/logar', [UsuarioController::class, 'logar'])
-    ->name('logar');
+Route::get('/inicio', [UsuarioController::class, 'index'])
+    ->name('inicio');
 
 Route::post('/cadastra/usuario', [UsuarioController::class, 'store'])
-    ->name('store.user');
+    ->name('store.user')->middleware(CheckEdit::class);
+
+Route::post('/logando', [UsuarioController::class, 'loginuser'])
+    ->name('login.user');
+
+Route::match(['get', 'post'], '/logout', [UsuarioController::class, 'logout'])
+    ->name("sair");
+
+
+Route::get('/controle/acesso', [UsuarioController::class, 'acesso'])
+    ->name('acesso');
+
+Route::post('/excluir/confirmar', [UsuarioController::class, 'confirmDelete'])
+    ->name('confirma.delete')->middleware(CheckEdit::class);
+
+
+Route::match(['get', 'post'], '/acesso/usuario/{id?}/deletar', [UsuarioController::class, 'destroy'])
+    ->name('destroy')->middleware(CheckEdit::class);
+
+Route::match(['get', 'post'], "/acesso/{id?}/editar", [UsuarioController::class, 'edit'])
+    ->name('edit')->middleware(CheckEdit::class);
+
+
+Route::post('/acesso/usuario/editado', [UsuarioController::class, 'update'])
+    ->name('update')->middleware(CheckEdit::class);
+
+
+Route::match(['get', 'post'], '/acesso/usuario/{id?}/deletar', [UsuarioController::class, 'destroy'])
+    ->name('destroy')->middleware(CheckEdit::class);
+
+//ajax
+
+Route::post("/kimberly/sentax", [UsuarioController::class, 'getkimberly'])
+    ->name('kimberly.sentax')->middleware('auth');
+
+Route::post("/quimicos/sentax", [UsuarioController::class, 'getquimicos'])
+    ->name('quimicos.sentax')->middleware('auth');
+
+Route::post("/rubbermaid/sentax", [UsuarioController::class, 'getrubbermaid'])
+    ->name("rubbermaid.sentax")->middleware('auth');
+
+Route::post("/outros/sentax", [UsuarioController::class, 'getoutros'])
+    ->name('outros.sentax')->middleware('auth');
+    
+Route::post("/estoque/sentax", [UsuarioController::class, 'getestoque'])
+    ->name('estoque.sentax')->middleware('auth');

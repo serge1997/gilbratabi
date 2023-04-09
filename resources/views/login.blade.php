@@ -19,7 +19,7 @@
                     <p class="text-red-500">* {{ session('err') }}</p> 
                   @endif
                 </div>
-                <form action="" method="post">
+                <form action="{{ route('login.user') }}" method="post">
                     @csrf
                   <div class="input flex flex-col p-2">
                     <label class="text-gray-700 uppercase">nome de usuario:</label>
